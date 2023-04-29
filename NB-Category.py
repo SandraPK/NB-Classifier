@@ -7,7 +7,8 @@ from sklearn.metrics import classification_report
 st.header('Category Prediction')
 
 # Load and preprocess the data
-data = ...
+with open('bbc-text.txt', 'r') as file:
+    data = file.read()
 
 # Split the data into training and testing sets
 X_train, X_test, y_train, y_test = train_test_split(data['text'], data['category'], test_size=0.2, random_state=42)
