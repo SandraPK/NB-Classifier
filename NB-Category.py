@@ -33,7 +33,7 @@ naivebayes.fit(X_transformed, y_train)
 # Get user input and make a prediction
 input = st.text_area("Enter the text", value="")
 if st.button("Predict"):
-    vec = vectorizer.transform([input]).toarray()
+    vec = vector.transform(input).toarray()
     pred = naivebayes.predict(vec)[0]
     category = ['TECH', 'BUSINESS', 'SPORTS', 'ENTERTAINMENT', 'POLITICS'][pred]
     st.write("The predicted category is:", category)
