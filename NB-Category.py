@@ -5,7 +5,6 @@ from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.metrics import classification_report
 
-st.header('Category Prediction')
 
 # Load and preprocess the data
 bbc_text = pd.read_csv(r"bbc-text.txt")
@@ -20,20 +19,23 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, train_size = 0.6, rand
 vector = CountVectorizer(stop_words = 'english',lowercase=False)
 # fit the vectorizer on the training data
 vector.fit(X_train)
-vector.vocabulary_
 X_transformed = vector.transform(X_train)
-X_transformed.toarray()
 # for test data
 X_test_transformed = vector.transform(X_test)
 naivebayes = MultinomialNB()
 naivebayes.fit(X_transformed, y_train)
 
-
+#save the model
+with open('model.pkl','wb')as f:
+    pickle.dump(naivebayes,f)
 
 # Get user input and make a prediction
+
+st.header('Category Prediction')
 input = st.text_area("Enter the text", value="")
 if st.button("Predict"):
-    vec = vector.transform(input).toarray()
-    pred = (list(naivebayes.predict(vec))[0]).replace('0', 'TECH').replace('1', 'BUSINESS').replace('2', 'SPORTS').replace('3','ENTERTAINMENT').replace('4','POLITICS')
-    
-    st.write("The predicted category is:", str(pred))
+    vec = vector.transform([input]).toarray()
+    pred = naivebayes.predict(vec)[0]
+    category = {0:'tech', 1:'business', 2:'sport', 3:'entertainment', 4:'politics'}
+    result=category[perd]
+    st.write("The predicted category is:{category}")
