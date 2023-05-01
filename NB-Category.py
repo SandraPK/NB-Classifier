@@ -38,4 +38,4 @@ if st.button("Predict"):
     pred = naivebayes.predict(vec)[0]
     category = {0:'tech', 1:'business', 2:'sport', 3:'entertainment', 4:'politics'}
     result=category[pred]
-    st.write("The predicted category is:"{category})
+    st.write("The predicted category is:",result)
