@@ -8,7 +8,7 @@ import pickle
 
 
 # Load and preprocess the data
-bbc_text = pd.read_csv(r"bbc-text.txt")
+bbc_text = pd.read_csv("bbc-text.txt")
 y = bbc_text.category
 #split data
 X_train, X_test, y_train, y_test = train_test_split(X, y, train_size = 0.6, random_state = 1)
